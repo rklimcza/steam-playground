@@ -9,13 +9,13 @@ class SteamAPI:
     def __init__(self, key):
         self._key = key
         
-    def get_name(self, id64):
+    def get_account_summary(self, id64):
         payload = {"key":self._key,
                    "steamids":id64}
         r = requests.get(self._steam_api + self._playersummary,
                          params=payload)
         summary = json.loads(r.text)
-        return summary["response"]["players"][0]["personaname"]
+        return summary["response"]["players"][0]
         
     def get_games(self, id64):
         payload = {"key": self._key,
